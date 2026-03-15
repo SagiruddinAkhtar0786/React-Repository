@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        "use strict";
+        let a = 24;
+        console.log(a);
+
+        let hello = "Hello, World!";
+        console.log(hello);
+
+        function greet() {
+            console.log("Greetings, Universe!");
+        }
+        //greet();
+
+        let objA = {
+            name: "Alice",
+            age: 30,
+            greet: function() {
+                console.log("Hello, I'm " + this.name);
+            },
+            greetA: function printDetails() {
+                console.log("Hello, I'm " + this.name+": printign details");
+            }        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.querySelector('button');
+            button.addEventListener('click', function() {
+                objA.greetA();
+            });
+        });
+
+        document.addEventListener("click", function() {
+            let conf = confirm("Do you want to see the greeting?");
+            if (conf)
+             objA.greet();
+        });
+
+        let arr=[23,5,6,33,45];
+        console.log(arr);
+
+        for(let i=0;i<arr.length;i++){
+            console.log(arr[i]);
+        }
+    </script>
+</head>
+<body>
+    <button>print</button>
+    <h1>testing</h1>
+    I am learnign Js
+</body>
+</html>
