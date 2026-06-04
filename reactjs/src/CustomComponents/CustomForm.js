@@ -4,7 +4,7 @@ import React, {useState}from 'react'
 export default function CustomForm(props) {
 
 //const [text, setText] = useState("Enter text here"); // useState is a hook which is used to change the state of the component and also to re-render the component when the state changes.   
-const [text, setText] = useState("");
+const [text, setText] = useState("dfghjkl;");
 
 const handleUpClick = () => {
     console.log("UpperCase was clicked" + text);
@@ -13,7 +13,7 @@ const handleUpClick = () => {
 }
 const handleOnChange = (event) => {
     console.log("On Change");
-    setText(event.target.value);
+   setText(event.target.value);
 }
 
 
@@ -39,7 +39,7 @@ const handleClearClick = () => {
             <h1 className="props_heading" >{props.heading} </h1>
             <div >
               
-                <textarea className="form-control" value = {text} id="myBox" rows="3" cols={"3"} onChange={handleOnChange}></textarea>
+                <textarea className="form-control" value = {text} id="myBox" rows="3" onChange={handleOnChange}></textarea>
             </div>
 
             <button className=" btn btn-primary mx-2 my-2" onClick={handleUpClick}>Conver to UpperCase</button>
