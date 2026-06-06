@@ -53,8 +53,10 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/" element={<CustomForm showAlert={showAlert} heading="Enter the text to Analyze below" mode={mode} />} />
         </Routes>
-        {/* <About/>*/}
-      </div>
+        {/* <About/> */}
+
+{/*         <CustomForm showAlert={showAlert} heading="Enter the text to Analyze below" mode={mode} />
+ */}      </div>
     </Router >
     </>
   );
