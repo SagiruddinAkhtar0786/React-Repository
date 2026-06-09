@@ -41,8 +41,7 @@ const handleClearClick = () => {
         <div className='container' style={{color: props.mode === 'dark' ? 'blue' : '#0b0b36' }}>
             <h1 className="props_heading" >{props.heading} </h1>
             <div >
-              
-                <textarea className="form-control" value = {text} style={{backgroundColor:props.mode === 'dark' ? 'grey' : 'white' , color: props.mode === 'dark' ? 'white' : '#737381'    }} id="myBox" rows="3" onChange={handleOnChange}></textarea>
+                <textarea className="form-control"  value = {text} style={{backgroundColor:props.mode === 'dark' ? '#134663' : 'white' , color: props.mode === 'dark' ? 'white' : '#737381'    }} id="myBox" rows="3" onChange={handleOnChange}></textarea>
             </div>
 
             <button className=" btn btn-primary mx-2 my-2" onClick={handleUpClick}>Conver to UpperCase</button>
@@ -53,8 +52,8 @@ const handleClearClick = () => {
 
         <div className="container my-3" style={{color: props.mode === 'dark' ? 'white' : '#1f1f5b' }}>
             <h2>your text here</h2>
-            <p>{text.split(" ").length}  words and  {text.length} characters </p>
-            <p>{0.008 * text.split(" ").length} minutes to read</p>
+            <p>{text.split(" ").filter((element) => { return element.length !== 0; }).length}  words and  {text.length} characters </p>
+            <p>{0.008 * text.split(" ") .filter((element) => { return element.length !== 0; }).length} minutes to read</p>
             <h2>Preview</h2>
             <p>{text.length > 0 ? text : "Enter something to preview"}</p>
         </div>
