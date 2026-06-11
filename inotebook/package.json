@@ -1,5 +1,5 @@
 {
-  "name": "newapp",
+  "name": "inotebook",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -9,10 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "react-infinite-scroll-component": "^7.2.1",
-    "react-router-dom": "^6.30.4",
     "react-scripts": "5.0.1",
-    "react-top-loading-bar": "^3.0.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

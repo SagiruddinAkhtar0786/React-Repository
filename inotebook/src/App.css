@@ -2,25 +2,6 @@
   text-align: center;
 }
 
-/* Remove internal scroll from InfiniteScroll component */
-.react-infinite-scroll-component {
-  overflow: visible !important;
-  height: auto !important;
-  max-height: none !important;
-  display: block !important;
-}
-
-.react-infinite-scroll-component__outerdiv {
-  overflow: visible !important;
-  height: auto !important;
-  max-height: none !important;
-  display: block !important;
-}
-
-div[style*="overflow: auto"] {
-  overflow: visible !important;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
