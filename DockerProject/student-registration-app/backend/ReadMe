@@ -1,0 +1,25 @@
+student-registration-app/
+│
+├── backend/
+│   ├── package.json
+│   ├── server.js
+│   ├── routes/
+│   │      signup.js
+│   └── controllers/
+│          signupController.js
+│
+├── frontend/
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── index.html
+│   ├── src/
+│   │     App.jsx
+│   │     App.css
+│   │     main.jsx
+│   │     api.js
+│   └── public/
+│
+└── README.md
+
+
+when we connect with two container monog and nongo express we will get an interective view after http://localhost:8081/ - user: admin and pass: pass
