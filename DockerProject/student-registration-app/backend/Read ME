@@ -1,0 +1,10 @@
+docker build -t student-registration_form:1.0 .
+PS D:\React\DockerProject\student-registration-app\backend> docker images
+
+PS D:\React\DockerProject\student-registration-app\backend> docker run student-registration_form:1.0
+docker run -it student-registration_form:1.0 bash
+
+
+created repository on Docker
+sagir015/studentresgistrationform
+docker build -t sagir015/studentresgistrationform .

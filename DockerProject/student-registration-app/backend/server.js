@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 
 // MongoDB Connection URL
 //const MONGO_URL = "mongodb://localhost:27017";
- const MONGO_URL = "mongodb://admin:admin@localhost:27017";
+ const MONGO_URL = "mongodb://admin:admin@mongo:27017"; //Here mongo is the MongoDB container name.
 
 // Create Mongo Client
 const client = new MongoClient(MONGO_URL);

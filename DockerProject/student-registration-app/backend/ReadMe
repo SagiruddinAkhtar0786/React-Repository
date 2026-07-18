@@ -23,3 +23,297 @@ student-registration-app/
 
 
 when we connect with two container monog and nongo express we will get an interective view after http://localhost:8081/ - user: admin and pass: pass
+
+*******************************************************
+how to run it
+********************************************************
+Use these commands from Command Prompt in order.
+
+Open the project folder
+cd /d D:\React\DockerProject\student-registration-app
+Start MongoDB containers
+docker compose -f backend\mongodb.yaml up -d
+Check that containers are running
+docker compose -f backend\mongodb.yaml ps
+Verify MongoDB authentication
+docker exec backend-mongo-1 mongosh -u admin -p admin --authenticationDatabase admin --eval "db.runCommand({ connectionStatus: 1 })"
+Start the backend
+cd backend
+node server.js
+If you want to stop the containers later
+docker compose -f backend\mongodb.yaml down
+
+
+***********************************************
+FROM node
+
+ENV MONGO_dB_USERNAME=admin
+ENV MONGO_dB_PASSWORD=admin
+
+RUN mkdir -p backend
+COPY . /backend
+CMD ["node", "/backend/server.js"]
+
+**********************************************************
+
+1. FROM node
+
+This tells Docker:
+
+"Start building my image using the official Node.js image."
+
+Think of it like installing an operating system with Node.js already installed.
+
+The official Node image already contains:
+
+Linux OS
+Node.js
+npm (Node Package Manager)
+
+So instead of installing Node manually, Docker downloads this image.
+
+For example:
+Base Image
+--------------------------------------------------
+Ubuntu/Linux
+Node.js
+npm
+--------------------------------------------------
+Your application will be built on top of this image.
+--------------------------------------------------
+ENV MONGO_dB_USERNAME=admin
+ENV MONGO_dB_PASSWORD=admin
+
+
+2. ENV
+
+This creates environment variables inside the container.
+
+These are similar to Java's:
+
+System.getenv("MONGO_DB_USERNAME");
+
+or in Node.js:
+
+process.env.MONGO_dB_USERNAME
+process.env.MONGO_dB_PASSWORD
+
+After this line, inside the container:
+
+MONGO_dB_USERNAME = admin
+MONGO_dB_PASSWORD = admin
+
+Your server can read them like:
+
+const username = process.env.MONGO_dB_USERNAME;
+const password = process.env.MONGO_dB_PASSWORD;
+
+Instead of hardcoding:
+
+const username = "admin";
+
+Environment variables are preferred because credentials can be changed without modifying code.
+
+--------------------------------------------------
+
+RUN mkdir -p backend
+
+3. RUN
+
+RUN executes a Linux command while the image is being built.
+
+Here Docker runs:
+
+mkdir -p backend
+
+which means:
+
+Create a folder named backend.
+
+The -p option means:
+
+If it already exists → don't show an error.
+If parent folders don't exist → create them too.
+
+Equivalent in Windows:
+
+mkdir backend
+
+After this step:
+
+/
+backend/
+
+exists inside the image.
+
+COPY . /backend
+--------------------------------------------------
+4. COPY
+This copies files from your local machine into the Docker image.
+
+Suppose your project is:
+
+Backend
+│
+├── server.js
+├── package.json
+├── package-lock.json
+└── routes
+
+Docker copies everything:
+
+COPY . /backend
+
+Result inside the image:
+
+/
+backend
+    server.js
+    package.json
+    package-lock.json
+    routes
+
+. means:
+
+Current folder.
+
+/backend means:
+
+Destination inside the Docker image.
+
+---------------------------------------------------
+CMD ["node", "/backend/server.js"]
+
+5. CMD
+
+This tells Docker:
+
+When the container starts, execute this command.
+
+Equivalent command:
+
+node /backend/server.js
+
+which starts your Express server.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------
+What happens when you run docker build?
+---------------------------------------------------
+Imagine your Dockerfile is read from top to bottom.
+
+Step 1
+
+Docker downloads:
+
+Node Image
+
+↓
+
+Step 2
+
+Adds environment variables
+
+USERNAME=admin
+PASSWORD=admin
+
+↓
+
+Step 3
+
+Creates folder
+
+/backend
+
+↓
+
+Step 4
+
+Copies your project
+
+server.js
+package.json
+routes
+
+↓
+
+Step 5
+
+Saves everything as a new Docker image.
+
+Nothing runs yet.
+---------------------------------------------------
+What happens when you run docker run?
+---------------------------------------------------
+Now Docker creates a container from the image.
+
+Docker Image
+       ↓
+Docker Container
+
+Then it executes:
+
+node /backend/server.js
+
+Your Node server starts.
+---------------------------------------------------
+Image vs Container
+---------------------------------------------------
+Think of it like this:
+
+Image = Recipe
+
+Ingredients
+Instructions
+
+It cannot execute anything by itself.
+
+Container = Cooked food
+
+You create it from the recipe.
+
+Image
+   ↓
+Container
+
+You can have:
+
+1 Image
+
+↓
+
+Container 1
+Container 2
+Container 3
+
+Many containers can be created from the same image.
+---------------------------------------------------
+One important improvement
+---------------------------------------------------
+Your Dockerfile works, but it is not ideal because it doesn't install your project's dependencies (node_modules).
+
+A more typical Dockerfile looks like this:
+
+FROM node
+
+WORKDIR /backend
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+ENV MONGO_DB_USERNAME=admin
+ENV MONGO_DB_PASSWORD=admin
+
+CMD ["node", "server.js"]
+
+Why this is better:
+
+WORKDIR sets /backend as the working directory, so you don't need full paths.
+COPY package*.json and RUN npm install install your dependencies inside the image.
+COPY . . copies the rest of your application after dependencies are installed, which also improves Docker build caching.
+The environment variable names use the more conventional MONGO_DB_* format (your original names with MONGO_dB_* still work as long as your code uses the same names).
+
+Once you understand this flow—Dockerfile → Image → Container → Node process—most Docker concepts become much easier to grasp.
