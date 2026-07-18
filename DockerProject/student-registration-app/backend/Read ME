@@ -3,8 +3,18 @@ PS D:\React\DockerProject\student-registration-app\backend> docker images
 
 PS D:\React\DockerProject\student-registration-app\backend> docker run student-registration_form:1.0
 docker run -it student-registration_form:1.0 bash
-
+****************************************
+related to repository creation and push
+****************************************
 
 created repository on Docker
 sagir015/studentresgistrationform
 docker build -t sagir015/studentresgistrationform .
+
+login in the terminal withe same user nad password 
+
+1) docker login
+
+>docker push sagir015/studentresgistrationform
+
+    docker logout
