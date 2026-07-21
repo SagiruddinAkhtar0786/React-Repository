@@ -14,9 +14,13 @@ app.get("/", (req, res) => {
     res.send("Express Server is Running");
 });
 
-// MongoDB Connection URL
-//const MONGO_URL = "mongodb://localhost:27017";
- const MONGO_URL = "mongodb://admin:admin@mongo:27017"; //Here mongo is the MongoDB container name.
+// MongoDB login details
+const MONGO_USER = "admin";
+const MONGO_PASSWORD = "admin";
+const MONGO_HOST = "localhost"; // use "mongo" when running inside Docker compose network
+const MONGO_PORT = "27017";
+const MONGO_DB = "admin"; // auth database for root user
+const MONGO_URL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/?authSource=${MONGO_DB}`;
 
 // Create Mongo Client
 const client = new MongoClient(MONGO_URL);

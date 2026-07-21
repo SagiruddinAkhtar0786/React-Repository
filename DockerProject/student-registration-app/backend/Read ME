@@ -18,3 +18,33 @@ login in the terminal withe same user nad password
 >docker push sagir015/studentresgistrationform
 
     docker logout
+
+    Volume
+
+  
+    
+    docker run -it -v "C:\Users\sagir\OneDrive\Desktop\data:/test/data" ubuntu
+    root@ca1344d71554:/test/data#  ls
+    root@ca1344d71554:/test/data#  cd test/data
+    root@ca1344d71554:/test/data# touch index.html
+    root@ca1344d71554:/test/data# touch server.js
+    exit
+    docker start 30f54059f1f35f8c5a64e2dc9da3fde8baa3b24221319a2566ec29a147e4abbd
+    docker ps
+    docker exec -it 30f54059f1f35f8c5a64e2dc9da3fde8baa3b24221319a2566ec29a147e4abbd /bin/bash
+    cd /test/data
+     ls
+    >docker stop 30f54059f1f35f8c5a64e2dc9da3fde8baa3b24221319a2566ec29a147e4abbd
+    docker rm 30f54059f1f35f8c5a64e2dc9da3fde8baa3b24221319a2566ec29a147e4abbd
+
+    now check in desktop/test/data teh file wil persist even after the container is removed. This is because we have mounted the volume from the host machine to the container.
+
+********************************
+    Docker compose  with usage of voluem
+
+********************************
+    docker-compose up -d
+    docker-compose down
+
+    docker compose -f mongodb.yaml up
+    added volumes in mongodb.yaml file to persist the data in the host machine. so that even if the container is removed the data will be persisted in the host machine.
